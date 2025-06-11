@@ -1,7 +1,5 @@
 package com.fbuilder.main.controller;
 
-
-import com.fbuilder.main.model.User;
 import com.fbuilder.main.model.dto.RegisterRequest;
 import com.fbuilder.main.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,28 +14,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import java.net.http.HttpRequest;
 
 @Controller
 public class AuthController {
-
     private final UserService userService;
     @Autowired
     private AuthenticationManager authenticationManager;
-
     public AuthController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping("/login")
-    public String login() {
-        return "login";
+    public String login(Model model) {
+        model.addAttribute("pageTitle", "Inicia sesion");
+        model.addAttribute("content", "pages/login");
+        return "layouts/base";
     }
     @GetMapping("/register")
-    public String registerForm() {
-        return "register";
+    public String registerForm(Model model) {
+        model.addAttribute("pageTitle", "Registrate");
+        model.addAttribute("content", "pages/register");
+        return "layouts/base";
     }
     @PostMapping("/register")
     public String register(RegisterRequest registerRequest, Model model, HttpServletRequest request) {
@@ -51,11 +48,12 @@ public class AuthController {
             HttpSession session = request.getSession(true);
             session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
 
-            System.out.println(authentication.getName());
             return "redirect:/";
         } catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());
-            return "register";
+            model.addAttribute("pageTitle", "Registrate");
+            model.addAttribute("content", "pages/register");
+            return "layouts/base";
         }
     }
 }

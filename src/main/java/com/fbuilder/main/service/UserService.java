@@ -2,17 +2,13 @@ package com.fbuilder.main.service;
 
 import com.fbuilder.main.exception.*;
 import com.fbuilder.main.model.User;
-import com.fbuilder.main.model.dto.RegisterRequest;
 import com.fbuilder.main.repository.UserRepository;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 @Service
 public class UserService implements UserDetailsService {
@@ -26,9 +22,6 @@ public class UserService implements UserDetailsService {
     }
 
     public User registerUser(String username, String password) {
-
-
-
         if (userRepository.findByUsername(username).isPresent()) {
             throw new UsernameAlreadyInUse("El nombre de usuario ya está en uso.");
         }
@@ -42,7 +35,6 @@ public class UserService implements UserDetailsService {
                 .find()) {
             throw new InvalidUsernameFormat("El nombre de usuario no es valido.");
         }
-
         User user = new User();
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
