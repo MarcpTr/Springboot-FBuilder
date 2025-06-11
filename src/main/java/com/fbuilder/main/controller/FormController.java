@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 
-public class UserController {
- @Autowired
+public class FormController {
+    @Autowired
     UserService userService;
-    @GetMapping("/profile")
-    public String profile( ){
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return "profile";
+    @GetMapping("/")
+    public String index(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
+
+        model.addAttribute("username", auth.getName());
+        return "index";
     }
 }
