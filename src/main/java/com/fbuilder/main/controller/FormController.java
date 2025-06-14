@@ -19,4 +19,10 @@ public class FormController {
         model.addAttribute("content", "pages/index");
         return "layouts/base";
     }
+    @GetMapping("/form/create")
+    public String create(Model model){
+        model.addAttribute("pageTitle", "Create form");
+        model.addAttribute("content", "pages/create-form");
+        return "layouts/base";
+    }
 }
