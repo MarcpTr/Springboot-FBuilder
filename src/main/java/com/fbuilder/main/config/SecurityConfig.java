@@ -13,7 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
+        http.csrf().disable()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/register", "/login","/","/error").permitAll()
                         .requestMatchers("/admin","/admin/**").hasRole("ADMIN")
