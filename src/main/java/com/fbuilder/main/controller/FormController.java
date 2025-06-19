@@ -1,5 +1,6 @@
 package com.fbuilder.main.controller;
 
+import com.fbuilder.main.model.Form;
 import com.fbuilder.main.model.dto.Anwsers;
 import com.fbuilder.main.model.dto.FormData;
 import com.fbuilder.main.service.FormService;
@@ -9,10 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -23,6 +21,7 @@ public class FormController {
     UserService userService;
     @Autowired
     FormService formService;
+
     @GetMapping("/")
     public String index(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -43,9 +42,17 @@ public class FormController {
 
         formService.createForm(formData, authentication.getName());
 
-
         model.addAttribute("pageTitle", "Pagina principal");
         model.addAttribute("content", "pages/index");
+        return "layouts/base";
+    }
+    @GetMapping("/form/{id}")
+    public String getFormById(@PathVariable("id") int id, Model model) {
+        Form form = formService.findById(id).orElseThrow();
+        System.out.println(form.getQuestions().get(0).getQuestion_text());
+        model.addAttribute("pageTitle", "Pagina principal");
+        model.addAttribute("content", "pages/form");
+        model.addAttribute("form", form);
         return "layouts/base";
     }
 }

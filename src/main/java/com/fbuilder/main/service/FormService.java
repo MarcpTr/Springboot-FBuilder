@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.Optional;
+
 @Service
 public class FormService {
     @Autowired
@@ -70,5 +72,9 @@ public class FormService {
                 optionRepository.save(option);
             }
         }
+    }
+
+    public Optional<Form> findById(int id) {
+       return formRepository.findById(id);
     }
 }

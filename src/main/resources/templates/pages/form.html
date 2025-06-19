@@ -1,4 +1,31 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:fragment="content">
-<h1>Responde al formulario</h1>
-</html>
+<div th:fragment="content" xmlns:th="http://www.w3.org/1999/xhtml">
+    <main class="h-screen flex flex-col w-full p-8 space-y-6 sm:h-screen sm:overflow-y-auto bg-gray-50 text-gray-800">
+        <h1 class="text-2xl font-bold mb-4">Responde al formulario</h1>
+
+        <div class="bg-white rounded-lg shadow p-6 space-y-2">
+            <p class="text-lg font-semibold" th:text="${form.name}">Nombre del formulario</p>
+            <p class="text-gray-600" th:text="${form.description}">Descripción del formulario</p>
+        </div>
+
+        <h3 class="text-xl font-semibold mt-6">Preguntas:</h3>
+
+        <div class="space-y-6">
+            <div th:each="question : ${form.questions}" class="bg-white rounded-lg shadow p-6">
+                <h3 class="text-lg font-semibold mb-4" th:text="${question.question_text}">Pregunta</h3>
+
+                <!-- Opciones disponibles -->
+                <ul th:if="${question.options != null and !#lists.isEmpty(question.options)}" class="space-y-2">
+                    <li th:each="option : ${question.options}" class="flex items-center space-x-2">
+                        <input type="checkbox"
+                               th:name="'question-' + ${question.id}"
+                               th:value="${option.id}"
+                               class="form-radio text-blue-600" />
+                        <label th:for="${'option-' + option.id}" th:text="${option.optionText}" class="text-gray-700">Opción</label>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </main>
+
+</div>
