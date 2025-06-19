@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,6 +30,15 @@ public class User {
     private String profileImagePath;
     @Column(name = "role")
     private String role = "USER";
+
+    @OneToMany(mappedBy = "user")
+    private List<Form> forms;
+
+    @OneToMany(mappedBy = "user")
+    private List<Submission> submissions;
+
+    @OneToMany(mappedBy = "user")
+    private List<Answer> answers;
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();

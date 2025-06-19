@@ -2,6 +2,7 @@ package com.fbuilder.main.controller;
 
 import com.fbuilder.main.model.dto.Anwsers;
 import com.fbuilder.main.model.dto.FormData;
+import com.fbuilder.main.service.FormService;
 import com.fbuilder.main.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,6 +19,8 @@ import java.util.List;
 public class FormController {
     @Autowired
     UserService userService;
+    @Autowired
+    FormService formService;
     @GetMapping("/")
     public String index(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -34,6 +37,9 @@ public class FormController {
     @PostMapping("/form/create")
     public String store(Model model, @ModelAttribute FormData formData)
     {
+
+        formService.createForm(formData, "Marc");
+
         System.out.println("Preguntas:");
         formData.getQuestions().forEach(System.out::println);
 
