@@ -8,6 +8,8 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class FormData {
+    private String name;
+    private String description;
     private List<String> questions;
     private List<CheckboxGroup> checkboxes;
 

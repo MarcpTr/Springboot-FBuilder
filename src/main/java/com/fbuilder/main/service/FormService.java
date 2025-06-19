@@ -27,8 +27,8 @@ public class FormService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         Form form = new Form();
-        form.setName("Untitled Form");
-        form.setDescription("Auto-generated form");
+        form.setName(formData.getName());
+        form.setDescription(formData.getDescription());
         form.setVisible(true);
         form.setOpen(true);
         form.setCreatedAt(new Timestamp(System.currentTimeMillis()).toLocalDateTime());
