@@ -1,6 +1,7 @@
 package com.fbuilder.main.controller;
 
 import com.fbuilder.main.model.dto.Anwsers;
+import com.fbuilder.main.model.dto.FormData;
 import com.fbuilder.main.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -8,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
@@ -30,17 +32,17 @@ public class FormController {
         return "layouts/base";
     }
     @PostMapping("/form/create")
-    public String store(Model model, @RequestBody List<Anwsers> anwsers)
+    public String store(Model model, @ModelAttribute FormData formData)
     {
-        for (Anwsers anwser : anwsers) {
-            switch (anwser.getType()) {
-                case "text":
-                case "email":
-                    System.out.println("Respuesta: " + anwser.getValue());
-                    break;
+        System.out.println("Preguntas:");
+        formData.getQuestions().forEach(System.out::println);
 
-            }
+        System.out.println("Checkboxes:");
+        for (FormData.CheckboxGroup cb : formData.getCheckboxes()) {
+            System.out.println("Label: " + cb.getQuestion());
+            System.out.println("Opciones: " + cb.getOption());
         }
+
         model.addAttribute("pageTitle", "Pagina principal");
         model.addAttribute("content", "pages/index");
         return "layouts/base";
