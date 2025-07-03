@@ -1,6 +1,7 @@
 package com.fbuilder.main.controller;
 
 import com.fbuilder.main.model.Form;
+import com.fbuilder.main.model.User;
 import com.fbuilder.main.model.dto.Anwsers;
 import com.fbuilder.main.model.dto.FormData;
 import com.fbuilder.main.service.FormService;
@@ -44,6 +45,17 @@ public class FormController {
 
         model.addAttribute("pageTitle", "Pagina principal");
         model.addAttribute("content", "pages/index");
+        return "layouts/base";
+    }
+    @GetMapping("/forms")
+    public String getUserForms(Model model) {
+        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
+        String username= authentication.getName();
+        User user = userService.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
+        List<Form> forms= formService.findByUserId(user.getId()).orElse(null);
+        model.addAttribute("pageTitle", "Tus formularios");
+        model.addAttribute("content", "pages/forms");
+        model.addAttribute("forms", forms);
         return "layouts/base";
     }
     @GetMapping("/form/{id}")

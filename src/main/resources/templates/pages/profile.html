@@ -4,7 +4,6 @@
     <p>Hola, <span th:text="${#authentication.name}">Usuario</span>!</p>
     <p>Tu rol es: <span th:text="${#authentication.authorities}">ROLE_USER</span></p>
     <form th:action="@{/logout}" method="post">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <button type="submit" class="bg-red-400">Cerrar sesión</button>
     </form>
 </main>

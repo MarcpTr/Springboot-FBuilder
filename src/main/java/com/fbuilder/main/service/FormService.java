@@ -10,6 +10,7 @@ import org.antlr.v4.runtime.misc.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 import java.sql.Timestamp;
 import java.util.Optional;
@@ -76,5 +77,9 @@ public class FormService {
 
     public Optional<Form> findById(int id) {
        return formRepository.findById(id);
+    }
+
+    public Optional<List<Form>> findByUserId(Long id) {
+        return formRepository.findByUserId(id);
     }
 }

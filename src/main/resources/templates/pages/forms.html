@@ -1,0 +1,11 @@
+<div th:fragment="content" xmlns:th="http://www.w3.org/1999/xhtml">
+    <main class="h-screen flex flex-col w-full p-8 space-y-6 sm:h-screen sm:overflow-y-auto bg-gray-50 text-gray-800">
+
+        <li  th:each="form : ${forms}" class="bg-white rounded-lg shadow p-6 ">
+            <div class="bg-white rounded-lg shadow p-6 space-y-2">
+                <p class="text-lg font-semibold" th:text="${form.name}">Nombre del formulario</p>
+                <p class="text-gray-600" th:text="${form.description}">Descripción del formulario</p>
+            </div>
+        </li>
+    </main>
+</div>
