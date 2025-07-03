@@ -9,11 +9,10 @@
 
         <h3 class="text-xl font-semibold mt-6">Preguntas:</h3>
 
-        <div class="space-y-6">
+        <form class="space-y-6">
             <div th:each="question : ${form.questions}" class="bg-white rounded-lg shadow p-6">
                 <h3 class="text-lg font-semibold mb-4" th:text="${question.question_text}">Pregunta</h3>
 
-                <!-- Opciones disponibles -->
                 <ul th:if="${question.options != null and !#lists.isEmpty(question.options)}" class="space-y-2">
                     <li th:each="option : ${question.options}" class="flex items-center space-x-2">
                         <input type="checkbox"
@@ -25,7 +24,11 @@
                 </ul>
 
             </div>
-        </div>
+            <button type="submit"
+                    class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-200">
+                Mandar formulario
+            </button>
+        </form>
     </main>
 
 </div>
