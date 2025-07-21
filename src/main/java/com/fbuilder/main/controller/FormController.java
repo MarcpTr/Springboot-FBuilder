@@ -67,4 +67,13 @@ public class FormController {
         model.addAttribute("form", form);
         return "layouts/base";
     }
+    @GetMapping("/form/{id}/edit")
+    public String getEditFormById(@PathVariable("id") int id, Model model) {
+        Form form = formService.findById(id).orElseThrow();
+        System.out.println(form.getQuestions().get(0).getQuestion_text());
+        model.addAttribute("pageTitle", "Pagina principal");
+        model.addAttribute("content", "pages/form");
+        model.addAttribute("form", form);
+        return "layouts/base";
+    }
 }
