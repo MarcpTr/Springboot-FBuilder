@@ -2,7 +2,6 @@ package com.fbuilder.main.controller;
 
 import com.fbuilder.main.model.Form;
 import com.fbuilder.main.model.User;
-import com.fbuilder.main.model.dto.Anwsers;
 import com.fbuilder.main.model.dto.FormData;
 import com.fbuilder.main.service.FormService;
 import com.fbuilder.main.service.UserService;
@@ -12,8 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
 import java.util.List;
 
 @Controller
