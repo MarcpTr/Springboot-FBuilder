@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:fragment="content">
 <main class="h-screen flex flex-col w-full p-8 space-y-4 sm:h-screen sm:overflow-y-auto">
-
     <h1 th:if="${#authentication.principal != 'anonymousUser'}"><a href="/my-collections">My collections</a></h1>
     <form action="/register" method="post" class="flex flex-col items-center space-y-6 p-6 max-w-md mx-auto bg-white shadow-lg rounded-lg">
 
