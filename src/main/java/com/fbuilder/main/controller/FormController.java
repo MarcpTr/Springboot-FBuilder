@@ -37,9 +37,7 @@ public class FormController {
     public String store(Model model, @ModelAttribute FormData formData)
     {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
         formService.createForm(formData, authentication.getName());
-
         model.addAttribute("pageTitle", "Pagina principal");
         model.addAttribute("content", "pages/index");
         return "layouts/base";
