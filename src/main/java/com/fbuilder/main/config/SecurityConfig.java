@@ -13,24 +13,24 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/register", "/login","/","/error","/form/*").permitAll()
-                        .requestMatchers("/admin","/admin/**").hasRole("ADMIN")
-                        .anyRequest().authenticated()
+                                .requestMatchers("/register", "/login", "/", "/error", "/form/*").permitAll()
+                                .requestMatchers("/admin", "/admin/**").hasRole("ADMIN")
+                                .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/", true)
-                        .permitAll()
+                                .loginPage("/login")
+                                .defaultSuccessUrl("/", true)
+                                .permitAll()
                 )
                 .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
-                        .deleteCookies("JSESSIONID", "remember-me")
+                                .logoutUrl("/logout")
+                                .logoutSuccessUrl("/")
+                                .deleteCookies("JSESSIONID", "remember-me")
                 ).rememberMe(remember -> remember
-                        .key("3(/w8976H86(/%/")
-                        .tokenValiditySeconds(604800).alwaysRemember(false)
+                                .key("3(/w8976H86(/%/")
+                                .tokenValiditySeconds(604800).alwaysRemember(false)
                 );
 
         return http.build();
